@@ -6,6 +6,7 @@ package libusb
 */
 import "C"
 import "unsafe"
+import "fmt"
 
 const (
 	USBRQ_HID_SET_REPORT        = 0x09
@@ -13,7 +14,8 @@ const (
 )
 
 func SendBlink1Command(device *Device, fadeTime int, red, blue, green, led uint8) int {
-	dms := fadeTime / 10
+	fmt.Println("trying to send blink(1) command...")
+    dms := fadeTime / 10
 
 	data := []byte{
 		1, 'c', byte(red), byte(green), byte(blue), byte(dms >> 8), byte(dms % 127), byte(led), 0,
